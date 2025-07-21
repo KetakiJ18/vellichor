@@ -30,15 +30,15 @@ const RingTimer = ({ duration }) => {
 
     return (
         <div style={{ width: 500, height: 500 }}>
-        <CircularProgressbar
-            value={percentage}
-            text={formatTime(remainingSeconds)}
-            styles={buildStyles({
-            textColor: '#333',
-            pathColor: '#f59e0b', // amber-500
-            trailColor: '#fde68a', // amber-200
-            })}
-        />
+            <p className='text-7xl font-semibold mb-4 flex items-center justify-items-center'>{formatTime(remainingSeconds)}</p>
+            <CircularProgressbar
+                value={percentage}
+                styles={buildStyles({
+                textColor: '#333',
+                pathColor: '#f59e0b', // amber-500
+                trailColor: '#fde68a', // amber-200
+                })}
+            />
         </div>
     );
 };

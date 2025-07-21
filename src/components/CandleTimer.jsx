@@ -28,9 +28,8 @@ const CandleTimer = () => {
     const candleImg = candleMap[duration];
 
     return (
-        <div className='min-h-screen bg-[#f9f5f0] flex flex-col items-center justify-center p-6'>
-            <h2 className='text-2xl font-semibold mb-6'>Focused for {duration} minutes</h2>
-            <img src={candleImg} alt={`Candle for ${duration} min`} className='h-64 object-contain mb-'/>
+        <div className='w-full h-full flex items-center justify-center '>
+            <img src={candleImg} alt={`Candle for ${duration} min`} className='w-full h-full object-contain'/>
         </div>
     );
 };
