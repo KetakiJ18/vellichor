@@ -3,12 +3,12 @@ import React from 'react';
 import {useLocation} from 'react-router-dom'
 
 import candle10 from '../assets/blue.png';
-import candle25 from '../assets/blue.png';
-import candle45 from '../assets/blue.png';
-import candle60 from '../assets/blue.png';
-import candle90 from '../assets/blue.png';
-import candle120 from '../assets/blue.png';
-import candle180 from '../assets/blue.png';
+import candle25 from '../assets/bubblegum.png';
+import candle45 from '../assets/green.png';
+import candle60 from '../assets/green_orange.png';
+import candle90 from '../assets/orange_mix.png';
+import candle120 from '../assets/pink.png';
+import candle180 from '../assets/purple.png';
 
 const candleMap = {
   10: candle10,
@@ -25,7 +25,7 @@ const CandleTimer = () => {
     const params = new URLSearchParams(search)
     const duration = parseInt(params.get('duration')) || 60
 
-    const candleImg = candleMap[duration]||candle10;
+    const candleImg = candleMap[duration];
 
     return (
         <div className='min-h-screen bg-[#f9f5f0] flex flex-col items-center justify-center p-6'>
