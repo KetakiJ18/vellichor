@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const RingTimer = ({ duration }) => {
+const RingTimer = ({duration, children}) => {
     const totalSeconds = duration*60
     const [remainingSeconds, setRemainingSeconds] = useState(totalSeconds);
 
@@ -29,16 +29,21 @@ const RingTimer = ({ duration }) => {
     };
 
     return (
-        <div style={{ width: 500, height: 500 }}>
-            <p className='text-7xl font-semibold mb-4 flex items-center justify-items-center'>{formatTime(remainingSeconds)}</p>
-            <CircularProgressbar
-                value={percentage}
-                styles={buildStyles({
-                textColor: '#333',
-                pathColor: '#f59e0b', // amber-500
-                trailColor: '#fde68a', // amber-200
-                })}
-            />
+        <div className='flex flex-col items-center justify-center'>
+            <div className='relative w-[30vw] h-[30vw] max-w-[400px] max-h-[400px]'>
+                <CircularProgressbar
+                    value={percentage}
+                    styles={buildStyles({
+                    textColor: '#333',
+                    pathColor: '#f59e0b', 
+                    trailColor: '#fde68a', 
+                    })}
+                />
+                <div className='absolute inset-0 flex items-center justify-center'>
+                    {children}
+                </div>
+            </div><br/>
+            <p className='text-4xl md:text-6xl font-semibold mb-2'>{formatTime(remainingSeconds)}</p>
         </div>
     );
 };

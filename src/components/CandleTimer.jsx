@@ -3,8 +3,8 @@ import React from 'react';
 import {useLocation} from 'react-router-dom'
 
 import candle10 from '../assets/blue.png';
-import candle25 from '../assets/bubblegum.png';
-import candle45 from '../assets/green.png';
+import candle20 from '../assets/bubblegum.png';
+import candle30 from '../assets/green.png';
 import candle60 from '../assets/green_orange.png';
 import candle90 from '../assets/orange_mix.png';
 import candle120 from '../assets/pink.png';
@@ -12,8 +12,8 @@ import candle180 from '../assets/purple.png';
 
 const candleMap = {
   10: candle10,
-  25: candle25,
-  45: candle45,
+  20: candle20,
+  30: candle30,
   60: candle60,
   90: candle90,
   120: candle120,
@@ -28,8 +28,11 @@ const CandleTimer = () => {
     const candleImg = candleMap[duration];
 
     return (
-        <div className='w-full h-full flex items-center justify-center '>
-            <img src={candleImg} alt={`Candle for ${duration} min`} className='w-full h-full object-contain'/>
+        <div className='absoule inset-0 flex items-center justify-center'>
+            <img 
+                src={candleImg} 
+                alt={`Candle for ${duration} min`} 
+                className='max-w-[20vw] max-h-[20vw] md:max-w-[250px] md:max-h-[250px] object-contain'/>
         </div>
     );
 };

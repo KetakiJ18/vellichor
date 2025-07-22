@@ -8,11 +8,16 @@ const Timer = () => {
     const duration=parseInt(query.get('duration'),10)||60
 
     return(
-        <div className="relative w-100 h-100 flex items-center justify-center">
-            <RingTimer duration={duration} />
-            <div className="absolute w-10 h-10 z-10 flex items-center justify-center">
-                <CandleTimer duration={duration} />
-            </div>
+        <div>
+            <div className="relative w-full min-h-screen flex items-center justify-center">
+            <RingTimer duration={duration}>
+                <CandleTimer/>
+            </RingTimer>
+        </div>
+        <div>
+            <button>Start</button>
+            <button>Reset</button>
+        </div>
         </div>
 
     )

@@ -27,23 +27,43 @@ const Home = () => {
         navigate(`/timer?duration=${duration}`)
     }
 
-    return(
+    return (
         <div className='min-h-screen bg-[#f9f5f0] py-10 px-6'>
-            <h1 className='text-3xl font-bold text-center mb-10'>Choose Your Candle</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center px-4">
-                {candles.map(({ duration, image }) => (
-                    <div
-                        key={duration}
-                        onClick={() => handleClick(duration)}
-                        className="cursor-pointer p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform transform hover:scale-105 text-center"
-                    >
-                        <img src={image} alt={`Candle ${duration}`} className="h-32 object-contain mb-2" />
-                        <p className="text-lg font-semibold text-gray-800">{duration} min</p>
+            <h1 className='text-3xl font-serif text-center mb-2'>🕯️Vellichor🕯️</h1>
+            <h5 className="text-2xl font-bold text-center md:text-center mb-5">Choose Your Candle</h5>
+            <div className="flex flex-col md:flex-row gap-10">
+                
+                <div className='flex-1'>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center px-4">
+                        {candles.map(({ duration, image }) => (
+                        <div
+                            key={duration}
+                            onClick={() => handleClick(duration)}
+                            className="cursor-pointer p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform transform hover:scale-105 text-center">
+                            <img 
+                                src={image} 
+                                alt={`Candle ${duration}`} 
+                                className="h-32 object-contain mb-2" />
+                            <p className="text-lg font-semibold text-gray-800">{duration} min</p>
+                        </div>
+                        ))}
                     </div>
-                ))}
+                </div>
+            
+                <div className="w-full md:w-1/4 bg-white p-6 rounded-2xl shadow-md h-fit">
+                    <h2 className="text-xl font-bold mb-4 text-center">Set Daily Goal</h2>
+                    <input
+                        type="number"
+                        placeholder="e.g. 3"
+                        className="border border-gray-300 rounded px-4 py-2 w-full text-left mb-4"/>
+                    <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                        Save Goal
+                    </button>
+                </div>
             </div>
         </div>
-    )
+);
+
 
 }
 
