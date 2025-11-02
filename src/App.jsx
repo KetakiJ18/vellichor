@@ -1,5 +1,6 @@
 import React from 'react';
 import Timer from './components/Timer'
+import Landing from './pages/Landing';
 import MusicPlayer from './components/MusicPlayer';
 import QuoteBox from './components/QuoteBox';
 import StatsPanel from './components/StatsPanel';
@@ -11,7 +12,8 @@ function App(){
   return(
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Landing/>}/>
+        <Route path="/home" element={<Home />} />
         <Route path="/timer" element={<Timer/>}/>
       </Routes>
     </Router>
