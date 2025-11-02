@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Volume2, VolumeX } from "lucide-react";
 import candleHero from "../assets/bubblegum.png";
-import ambientMusic from "../assets/ambient_music.mp3";
+import ambientMusic from "../assets/lofi.mp3";
 
 const Landing = () => {
   const navigate = useNavigate();
