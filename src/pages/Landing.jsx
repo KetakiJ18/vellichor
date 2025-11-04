@@ -37,10 +37,10 @@ const Landing = () => {
     }, 200);
 
     return () => {
-      audio.pause();
-      clearInterval(fadeIn);
-    };
-  }, []);
+        audio.pause();
+        clearInterval(fadeIn);
+      };
+    }, []);
 
   const toggleMusic = () => {
     const audio = audioRef.current;
@@ -138,7 +138,7 @@ const Landing = () => {
         transition={{ delay: 1.2, duration: 1.5 }}
         className="text-sm text-gray-500 mt-16"
       >
-        ✨ Get busy hustling ✨
+        ✨ Get busy hustling ✨<br/>~Ketaki Joshi
       </motion.p>
     </div>
   );
