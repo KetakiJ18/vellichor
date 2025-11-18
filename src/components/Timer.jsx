@@ -20,6 +20,13 @@ const Timer = () => {
   const handleFinish = () => {
     setIsRunning(false);
     setShowDonePopup(true);
+
+    const duration = parseInt(query.get("duration"),10);
+
+    const prev = parseInt(localStorage.getItem("minutesDone")) || 0;
+    const updated = prev + duration;
+
+    localStorage.setItem("minutesDone", updated);
   };
 
   const handleReset = () => {
