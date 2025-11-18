@@ -132,14 +132,6 @@ const Landing = () => {
         )}
       </motion.button>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1.5 }}
-        className="text-sm text-gray-500 mt-16"
-      >
-        ✨ Get busy hustling ✨<br/>~Ketaki Joshi
-      </motion.p>
     </div>
   );
 };

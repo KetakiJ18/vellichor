@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const RingTimer = ({ duration, children, isRunning, resetSignal }) => {
+const RingTimer = ({ duration, children, isRunning, resetSignal, onFinish }) => {
   const totalSeconds = duration * 60;
   const [remainingSeconds, setRemainingSeconds] = useState(totalSeconds);
 
   useEffect(() => {
-    // Handle reset from parent
     if (resetSignal) {
       setRemainingSeconds(totalSeconds);
       return;
@@ -19,6 +18,7 @@ const RingTimer = ({ duration, children, isRunning, resetSignal }) => {
       setRemainingSeconds((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
+          onFinish && onFinish();
           return 0;
         }
         return prev - 1;
@@ -26,7 +26,7 @@ const RingTimer = ({ duration, children, isRunning, resetSignal }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isRunning, resetSignal, totalSeconds]);
+  }, [isRunning, resetSignal, totalSeconds, onFinish]);
 
   const percentage = (remainingSeconds / totalSeconds) * 100;
 

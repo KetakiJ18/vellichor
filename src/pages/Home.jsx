@@ -1,16 +1,17 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom';
-import candle10 from '../assets/blue.png';
-import candle20 from '../assets/bubblegum.png';
-import candle30 from '../assets/yellow.png';
-import candle45 from '../assets/green.png';
-import candle60 from '../assets/green_orange.png';
-import candle90 from '../assets/orange_mix.png';
-import candle120 from '../assets/pink.png';
-import candle180 from '../assets/purple.png';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import candle10 from "../assets/blue.png";
+import candle20 from "../assets/bubblegum.png";
+import candle30 from "../assets/yellow.png";
+import candle45 from "../assets/green.png";
+import candle60 from "../assets/green_orange.png";
+import candle90 from "../assets/orange_mix.png";
+import candle120 from "../assets/pink.png";
+import candle180 from "../assets/purple.png";
 
 const candles = [
-  { duration: 10, image: candle10 },
+  { duration: "custom", image: candle10 },
   { duration: 20, image: candle20 },
   { duration: 30, image: candle30 },
   { duration: 45, image: candle45 },
@@ -21,50 +22,97 @@ const candles = [
 ];
 
 const Home = () => {
-    const navigate = useNavigate()
+  const [showModal, setShowModal] = React.useState(false);
+  const [customMinutes, setCustomMinutes] = React.useState("");
 
-    const handleClick = (duration) => {
-        navigate(`/timer?duration=${duration}`)
+  const navigate = useNavigate();
+
+  const handleClick = (duration) => {
+    if (duration === "custom") {
+      setShowModal(true);
+      return;
     }
+    navigate(`/timer?duration=${duration}`);
+  };
 
-    return (
-        <div className='min-h-screen bg-[#f9f5f0] py-10 px-6'>
-            <h1 className='text-3xl font-serif text-center mb-2'>🕯️Vellichor🕯️</h1>
-            <h5 className="text-2xl font-bold text-center md:text-center mb-5">Choose Your Candle</h5>
-            <div className="flex flex-col md:flex-row gap-10">
-                
-                <div className='flex-1'>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center px-4">
-                        {candles.map(({ duration, image }) => (
-                        <div
-                            key={duration}
-                            onClick={() => handleClick(duration)}
-                            className="cursor-pointer p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform transform hover:scale-105 text-center">
-                            <img 
-                                src={image} 
-                                alt={`Candle ${duration}`} 
-                                className="h-32 object-contain mb-2" />
-                            <p className="text-lg font-semibold text-gray-800">{duration} min</p>
-                        </div>
-                        ))}
-                    </div>
+  return (
+    <>
+      {/* MAIN PAGE */}
+      <div className="min-h-screen bg-[#f9f5f0] py-10 px-6">
+        <h1 className="text-3xl font-serif text-center mb-2">🕯️Vellichor🕯️</h1>
+        <h5 className="text-2xl font-bold text-center mb-5">Choose Your Candle</h5>
+
+        <div className="flex flex-col md:flex-row gap-10">
+          {/* Candle Grid */}
+          <div className="flex-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center px-4">
+              {candles.map(({ duration, image }) => (
+                <div
+                  key={duration}
+                  onClick={() => handleClick(duration)}
+                  className="cursor-pointer p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105 text-center"
+                >
+                  <img src={image} alt="" className="h-32 object-contain mb-2" />
+                  <p className="text-lg font-semibold text-gray-800">
+                    {duration === "custom" ? "Custom Timer" : `${duration} min`}
+                  </p>
                 </div>
-            
-                <div className="w-full md:w-1/4 bg-white p-6 rounded-2xl shadow-md h-fit">
-                    <h2 className="text-xl font-bold mb-4 text-center">Set Daily Goal</h2>
-                    <input
-                        type="number"
-                        placeholder="e.g. 3"
-                        className="border border-gray-300 rounded px-4 py-2 w-full text-left mb-4"/>
-                    <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                        Save Goal
-                    </button>
-                </div>
+              ))}
             </div>
+          </div>
+
+          {/* Daily Goal Box */}
+          <div className="w-full md:w-1/4 bg-white p-6 rounded-2xl shadow-md h-fit">
+            <h2 className="text-xl font-bold mb-4 text-center">Set Daily Goal</h2>
+            <input
+              type="number"
+              placeholder="e.g. 3"
+              className="border border-gray-300 rounded px-4 py-2 w-full text-left mb-4"
+            />
+            <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+              Save Goal
+            </button>
+          </div>
         </div>
-);
+      </div>
 
+      {/* CUSTOM TIMER MODAL */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-xl w-80">
+            <h2 className="text-xl font-bold mb-4 text-center">Set Custom Time</h2>
 
-}
+            <input
+              type="number"
+              value={customMinutes}
+              onChange={(e) => setCustomMinutes(e.target.value)}
+              placeholder="Minutes"
+              className="w-full border px-4 py-2 rounded mb-4 text-center"
+            />
 
-export default Home
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowModal(false)}
+                className="flex-1 bg-gray-300 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  if (customMinutes > 0) {
+                    navigate(`/timer?duration=${customMinutes}`);
+                  }
+                }}
+                className="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
+              >
+                Start
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Home;

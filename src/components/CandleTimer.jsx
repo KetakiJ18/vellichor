@@ -24,14 +24,16 @@ const CandleTimer = () => {
     const {search} = useLocation()
     const params = new URLSearchParams(search)
     const duration = parseInt(params.get('duration')) || 60
+    const customTime = parseInt(params.get('custom'))
 
-    const candleImg = candleMap[duration];
+    const finalDuration = customTime || duration || 60
+    const candleImg = candleMap[finalDuration] || candle10
 
     return (
         <div className='absoule inset-0 flex items-center justify-center'>
             <img 
                 src={candleImg} 
-                alt={`Candle for ${duration} min`} 
+                alt={`Candle for ${finalDuration} min`} 
                 className='max-w-[20vw] max-h-[20vw] md:max-w-[250px] md:max-h-[250px] object-contain'/>
         </div>
     );
