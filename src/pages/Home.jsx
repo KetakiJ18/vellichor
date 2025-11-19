@@ -53,7 +53,8 @@ const Home = () => {
   return (
     <>
       <div className="min-h-screen bg-[#f9f5f0] py-10 px-6">
-        <h1 className="text-3xl font-serif text-center mb-2">🕯️Vellichor🕯️</h1>
+        <h1 className="text-4xl font-['Parisienne'] text-center mb-2">🕯️Vellichor🕯️</h1>
+        
         <h5 className="text-2xl font-bold text-center mb-5">Choose Your Candle</h5>
 
         <div className="flex flex-col md:flex-row gap-10">

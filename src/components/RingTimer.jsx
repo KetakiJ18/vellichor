@@ -38,10 +38,10 @@ const RingTimer = ({ duration, children, isRunning, resetSignal, onFinish }) => 
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="text-4xl md:text-6xl font-semibold mb-6">
+      <p className="text-2xl md:text-6xl font-semibold mb-6">
         {formatTime(remainingSeconds)}
       </p>
-      <div className="relative w-[30vw] h-[30vw] max-w-[400px] max-h-[400px]">
+      <div className="relative w-[25vw] h-[25vw] max-w-[400px] max-h-[400px]">
         <CircularProgressbar
           value={percentage}
           styles={buildStyles({
