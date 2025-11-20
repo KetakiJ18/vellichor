@@ -64,7 +64,7 @@ const Timer = () => {
       )}
 
       {/* Main Timer Container (glass effect) */}
-      <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl p-10 flex flex-col items-center mt-6 transition-all z-10">
+      <div className="relative bg-white/10 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl p-10 flex flex-col items-center mt-6 transition-all overflow-hidden">
         
         <RingTimer
           duration={duration}
