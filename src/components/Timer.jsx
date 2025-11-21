@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CandleTimer from "./CandleTimer";
 import RingTimer from "./RingTimer";
 import lofiMusic from "../assets/lofi.mp3";
-
+import bgimage from "../assets/paris_skyline.jpg";
 
 const Timer = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const Timer = () => {
   const [showDonePopup, setShowDonePopup] = useState(false);
   const [playMusic, setPlayMusic] = useState(false);
 
-
   const handleToggle = () => {
     setIsRunning((prev) => !prev);
     setResetSignal(false);
@@ -26,7 +25,6 @@ const Timer = () => {
     setShowDonePopup(true);
 
     const duration = parseInt(query.get("duration"), 10);
-
     const prev = parseInt(localStorage.getItem("minutesDone")) || 0;
     const updated = prev + duration;
 
@@ -40,9 +38,16 @@ const Timer = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#f7e9d7] to-[#fdfcf9] relative overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#f7e9d7] to-[#fdfcf9] relative overflow-hidden z-0">
 
-      {/* BACK BUTTON – Floating aesthetic */}
+      {/* Background Image */}
+      <img
+        src={bgimage}
+        alt="timer background"
+        className="absolute inset-0 w-full h-full object-cover opacity-50"
+      />
+
+      {/* Back Button */}
       <button
         onClick={() => navigate("/home")}
         className="absolute top-6 left-6 px-5 py-2 rounded-full bg-white/70 backdrop-blur-md shadow-lg hover:shadow-xl transition-all text-gray-800 font-semibold"
@@ -50,11 +55,12 @@ const Timer = () => {
         ← Back
       </button>
 
+      {/* Music Toggle */}
       <button
         onClick={() => setPlayMusic(!playMusic)}
         className="absolute top-6 right-6 px-5 py-2 rounded-full bg-white/70 shadow-lg"
       >
-        {playMusic ? "🔇 Stop Music" : "🎵 Relax"}
+        {playMusic ? "🔇 Stop Music" : "🎵 Play Music"}
       </button>
 
       {playMusic && (
@@ -63,44 +69,45 @@ const Timer = () => {
         </audio>
       )}
 
-      {/* Main Timer Container (glass effect) */}
-      <div className="relative bg-white/10 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl p-10 flex flex-col items-center mt-6 transition-all overflow-hidden">
-        
-        <RingTimer
-          duration={duration}
-          isRunning={isRunning}
-          resetSignal={resetSignal}
-          onFinish={handleFinish}
-        >
-          <CandleTimer />
-        </RingTimer>
+      {/* Timer Container (Glass Card) */}
+      <div className="relative bg-white/10 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl p-10 flex flex-col items-center mt-6 transition-all overflow-hidden z-20">
 
-        {/* CONTROL BUTTONS */}
-        <div className="flex gap-6 mt-10">
+        <div className="absolute inset-0 bg-white/40 mix-blend-overlay"></div>
 
-          {/* Start/Pause Button */}
-          <button
-            onClick={handleToggle}
-            className={`px-8 py-3 text-white rounded-full text-lg shadow-lg transition-all duration-300 active:scale-95 ${
-              isRunning
-                ? "bg-yellow-500 hover:bg-yellow-600"
-                : "bg-green-600 hover:bg-green-700"
-            }`}
+        <div className="relative z-10 flex flex-col items-center">
+          <RingTimer
+            duration={duration}
+            isRunning={isRunning}
+            resetSignal={resetSignal}
+            onFinish={handleFinish}
           >
-            {isRunning ? "Pause" : "Start"}
-          </button>
+            <CandleTimer />
+          </RingTimer>
 
-          {/* Reset Button */}
-          <button
-            onClick={handleReset}
-            className="px-8 py-3 bg-red-600 text-white rounded-full text-lg shadow-lg hover:bg-red-700 active:scale-95 transition-all"
-          >
-            Reset
-          </button>
+          {/* Controls */}
+          <div className="flex gap-6 mt-10">
+            <button
+              onClick={handleToggle}
+              className={`px-8 py-3 text-white rounded-full text-lg shadow-lg transition-all duration-300 active:scale-95 ${
+                isRunning
+                  ? "bg-yellow-500 hover:bg-yellow-600"
+                  : "bg-green-600 hover:bg-green-700"
+              }`}
+            >
+              {isRunning ? "Pause" : "Start"}
+            </button>
+
+            <button
+              onClick={handleReset}
+              className="px-8 py-3 bg-red-600 text-white rounded-full text-lg shadow-lg hover:bg-red-700 active:scale-95 transition-all"
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* DONE POPUP MODAL */}
+      {/* Done Popup */}
       {showDonePopup && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white animate-fadeIn p-8 rounded-2xl shadow-2xl text-center w-80">
@@ -122,24 +129,23 @@ const Timer = () => {
         </div>
       )}
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-17">
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute bg-white/70 rounded-full animate-float"
-          style={{
-            width: `${50 + 0.1 * 50}px`,
-            height: `${50 + 0.1 * 50}px`,
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${4 + Math.random() * 6}s`,
-            animationDelay: `${Math.random() * 4}s`,
-            top: `${Math.random() * 100}%`,
-          }}
-    ></div>
-  ))}
-</div>
-
-
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-50">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-white/70 rounded-full animate-float"
+            style={{
+              width: `${50 + 0.1 * 50}px`,
+              height: `${50 + 0.1 * 50}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDuration: `${4 + Math.random() * 6}s`,
+              animationDelay: `${Math.random() * 4}s`,
+            }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 };
